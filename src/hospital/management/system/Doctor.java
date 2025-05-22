@@ -16,7 +16,7 @@ public class Doctor {
 
 
     }
-    public void wiewDoctors() {
+    public void viewDoctors() {
         String query = "SELECT * FROM doctors";
         try {
             PreparedStatement ps = conn.prepareStatement(query);
@@ -42,10 +42,11 @@ public class Doctor {
         }
     }
 
-        public boolean checkDoctor(){
+        public boolean checkDoctor(int id){
             String query = "SELECT * FROM doctors WHERE id =?";
             try{
                 PreparedStatement ps = conn.prepareStatement(query);
+                ps.setInt(1, id);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()){
                     return true;

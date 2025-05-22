@@ -6,16 +6,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class patient {
+public class Patient {
 
    private  Connection connection;
    private  Scanner scanner;
 
 
-    public patient(Connection con, String s) {
-        this.connection=con;
-        this.scanner=s;
+
+    public Patient(Connection con, Scanner s) {
+        this.connection = con;
+        this.scanner = s;
     }
+
 
 
     public void addPatient() {
@@ -75,12 +77,13 @@ public class patient {
             e.printStackTrace();
         }
     }
-        public Boolean checkPatients(){
-        String query = "SELECT * FROM patient WHERE id=?;";
+        public boolean checkPatients(int id){
+        String query = "SELECT * FROM patients WHERE id=?;";
         try {
 
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 return true;
